@@ -1,0 +1,4 @@
+playlists
+=========
+
+Camel websocket example
