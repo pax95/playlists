@@ -21,6 +21,7 @@ public class PlaylistsRouteTest extends CamelSpringTestSupport {
 		getMockEndpoint("mock:last").expectedMessageCount(ChannelList.getChannels().size());
 		template.sendBody("direct:start", "foo");
 		assertMockEndpointsSatisfied();
+		Thread.sleep(30000);
 		// we must manually start when we are done with all the advice with
 	}
 
