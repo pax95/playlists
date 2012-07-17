@@ -21,8 +21,8 @@ public class LastFmAggregationStrategy implements AggregationStrategy {
 	@Override
 	public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
 		Track track = oldExchange.getIn().getBody(Track.class);
-		oldExchange.setProperty("CamelCharsetName", "UTF-8");
-		newExchange.setProperty("CamelCharsetName", "UTF-8");
+		oldExchange.setProperty(Exchange.CHARSET_NAME, "UTF-8");
+		newExchange.setProperty(Exchange.CHARSET_NAME, "UTF-8");
 		String body = newExchange.getIn().getBody(String.class);
 		
 		DocumentBuilderFactory factoryBuilder = DocumentBuilderFactory.newInstance();
