@@ -54,7 +54,7 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 				}
 			})
 			.setProperty(Exchange.CHARSET_NAME, constant("UTF-8"))
-    		.setHeader(Exchange.HTTP_QUERY, simple("method=track.getInfo&api_key=b25b959554ed76058ac220b7b2e0a026&artist=${header.artist}&track=${header.title}"))
+    		.setHeader(Exchange.HTTP_QUERY, simple("method=track.getInfo&api_key={{lfm-api-key}}&artist=${header.artist}&track=${header.title}"))
 			.setBody().simple("1")
 			.to("http://ws.audioscrobbler.com/2.0/?throwExceptionOnFailure=false");
 	}

@@ -19,6 +19,7 @@
        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<propertyPlaceholder id="properties" location="playlists.properties"/>
 		<package>dk.miw.playlists</package>
 	</camelContext>
 
