@@ -9,6 +9,8 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.processor.idempotent.FileIdempotentRepository;
 
+import dk.miw.playlists.model.Track;
+
 public class PlaylistsFeederRoute extends RouteBuilder {
 
 	@Override
@@ -20,20 +22,24 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 			.to("http://dummy").id("dummy")
 			.unmarshal().json(JsonLibrary.Gson)
 			.filter(simple("${body[now][status]} == 'music'"))
-			.bean(NowFilter.class)
-			.setHeader("artist", simple("${body[track][display_artist]}"))
-			.setHeader("title", simple("${body[track][track_title]}"))
-			.idempotentConsumer(simple("${body[track][start_time]}-${body[channel]}"), FileIdempotentRepository.fileIdempotentRepository(new File("repo.dat"), 250))
+			.convertBodyTo(Track.class)
+			.setHeader("artist", simple("${body.artist}"))
+			.setHeader("title", simple("${body.title}"))
+			.idempotentConsumer(simple("${body.time}-${body.channel}"), FileIdempotentRepository.fileIdempotentRepository(new File("repo.dat"), 250))
 			.to("direct:process");
 		
 		from("direct:process")
 			.setProperty(Exchange.CHARSET_NAME, constant("UTF-8"))
 			.enrich("direct:lastfmEnricher", new LastFmAggregationStrategy())
-			.marshal().json(JsonLibrary.Gson)
+			.marshal().json(JsonLibrary.Gson, Track.class)
 			.to("activemq:topic:playlists");
 			
 		//enrich flight with weather information
     	from("direct:lastfmEnricher")
+    		.onException(Exception.class)
+    			.to("log:dk.miw.playlists?showAll=true" )
+    			.handled(true)
+    		.end()
     		.removeHeader(Exchange.HTTP_URI)
     		.process(new Processor() {
 				@Override
@@ -49,7 +55,6 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 				}
 			})
     		.setHeader(Exchange.HTTP_QUERY, simple("method=track.getInfo&api_key=b25b959554ed76058ac220b7b2e0a026&artist=${header.artist}&track=${header.title}"))
-			.log("headers  ${header.CamelHttpQuery}")
 			.setBody().simple("1")
 			.to("http://ws.audioscrobbler.com/2.0/");
 	}

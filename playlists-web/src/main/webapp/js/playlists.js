@@ -47,10 +47,10 @@ $(document).ready(function () {
 
             // extract the stock data fields
             var channel = current.channel;
-            var start = current.track.start_time;
-            var title = current.track.track_title;
-            var artist = current.track.display_artist;
-
+            var start = current.time;
+            var title = current.title;
+            var artist = current.artist;
+            var album = current.album;
             // lookup the table row
             var playRowIndex = playRowIndexes[channel];
             var playRow = playTable.rows[playRowIndex];
@@ -59,13 +59,14 @@ $(document).ready(function () {
             if (playRow === undefined) {
                 var playRowIndex = playTable.rows.length;
                 playRow = playTable.insertRow(playRowIndex);
-                for (var cell = 0; cell < 4; cell++) {
+                for (var cell = 0; cell < 5; cell++) {
                     playRow.insertCell(cell);
                 }
                 playRow.cells[0].className = 'symbol';
                 playRow.cells[1].className = 'open';
                 playRow.cells[2].className = 'last';
                 playRow.cells[3].className = 'change';
+                playRow.cells[4].className = 'change';
                 playRowIndexes[channel] = playRowIndex;
             }
 
@@ -77,6 +78,7 @@ $(document).ready(function () {
             playRow.cells[1].innerHTML = start;
             playRow.cells[2].innerHTML = title;
             playRow.cells[3].innerHTML = artist;
+            playRow.cells[4].innerHTML = album;
 
 
         }

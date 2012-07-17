@@ -9,7 +9,9 @@ public class Track {
 	private String artist;
 	private String title;
 	private String time;
-	private String channnel;
+	private String channel;
+	private String album;
+	private String albumPicture;
 	
 	public String getTitle() {
 		return title;
@@ -17,11 +19,11 @@ public class Track {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getChannnel() {
-		return channnel;
+	public String getChannel() {
+		return channel;
 	}
-	public void setChannnel(String channnel) {
-		this.channnel = channnel;
+	public void setChannel(String channnel) {
+		this.channel = channnel;
 	}
 	
 	public void setTime(String time) {
@@ -47,6 +49,30 @@ public class Track {
 		this.time = (String) now.get("start_time");
 		this.artist = (String) now.get("display_artist");
 		Map<String, Object> info = (Map<String, Object>) map.get("info");
-		this.channnel = (String) info.get("channel");
+		this.channel = (String) info.get("channel");
+		this.album = "";
+		this.albumPicture = "";
 	}
+	
+	
+	
+	public String getAlbum() {
+		return album;
+	}
+	public void setAlbum(String album) {
+		this.album = album;
+	}
+	public String getAlbumPicture() {
+		return albumPicture;
+	}
+	public void setAlbumPicture(String albumPicture) {
+		this.albumPicture = albumPicture;
+	}
+	
+	@Override
+	public String toString() {
+		return "Track [artist=" + artist + ", title=" + title + ", time=" + time + ", channel=" + channel + ", album="
+				+ album + ", albumPicture=" + albumPicture + "]";
+	}
+	
 }
