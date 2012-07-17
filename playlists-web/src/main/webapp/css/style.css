@@ -24,7 +24,8 @@ div.main {
     -moz-border-radius: 10px;
     border-radius: 10px;
     width: 600px;
-    height: 800px;
+    height: 600px;
+    overflow: auto;
 
 }
 
@@ -43,11 +44,6 @@ table {
 
 }
 
-.feedTitle {
-    font-size: 15px;
-    text-align: center;
-    vertical-align: middle;
-}
 
 th {
     border-left: 1px solid #aeb3b6;
@@ -95,102 +91,6 @@ td.green {
     border-style: solid;
 }
 
-.news {
-    width: 1000px;
-    height: 100px;
-    overflow: hidden;
-    border: 1px solid #DDD;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px #DDD;
-}
-
-.news li {
-    font-size: 15px;
-    height: 30px;
-    border-bottom: 1px dotted #DDD;
-    padding: 5px;
-    margin: 0px 5px;
-}
-
-#news {
-    height: 300px;
-}
-
-#news li {
-    height: 80px;
-    overflow: hidden;
-}
-
-
-#newsList { display: none;}
-
-.tweet {
-    width: 1000px;
-    height: 50px;
-    overflow: hidden;
-    border: 1px solid #DDD;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px #DDD;
-}
-
-.tweet li {
-    font-size: 15px;
-    height: 30px;
-    border-bottom: 1px dotted #DDD;
-    padding: 5px;
-    margin: 0px 5px;
-}
-
-#tweet {
-    height: 300px;
-}
-
-#tweet li {
-    height: 40px;
-    overflow: hidden;
-}
-
-#tweetList { display: none;}
-
-#rss {
-    height: 300px;
-}
-
-#rss li {
-    height: 80px;
-    overflow: hidden;
-}
-
-#rssList { display: none;}
-
-
-.newsTable {
-    font-size: 14px;
-    border-color: #44687d;
-    border-bottom-width: 1px solid;
-}
-
-.newsTable th {
-    color: #ffffff;
-    background-color: #ff5113;
-    border-color: #cccccc;
-    border-width: 0px 1px 1px 0px;
-    border-style: solid;
-    padding-bottom: 3px;
-}
-
-.newsTable tr td {
-    height: 22px;
-    border-color: #cccccc;
-    border-width: 0px 0px 1px 0px;
-    border-style: solid;
-}
 
 .symbol {
     text-align: left;
@@ -238,36 +138,3 @@ td.green {
     padding-right: 20px;
 }
 
-.upChange {
-    background: url(/images/stock_index_up.jpg) center left no-repeat;
-    background-size: 10px;
-    position: relative;
-    font-weight: bold;
-    color: green;
-    text-align: right;
-    padding-right: 10px;
-}
-
-.downChange {
-    background: url(/images/stock_index_down.jpg) center left no-repeat;
-    background-size: 10px;
-    position: relative;
-    font-weight: bold;
-    color: red;
-    text-align: right;
-    padding-right: 10px;
-}
-
-.upPercent {
-    font-weight: bold;
-    color: green;
-    text-align: right;
-    padding-right: 10px;
-}
-
-.downPercent {
-    font-weight: bold;
-    color: red;
-    text-align: right;
-    padding-right: 10px;
-}

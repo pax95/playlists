@@ -51,6 +51,10 @@ $(document).ready(function () {
             var title = current.title;
             var artist = current.artist;
             var album = current.album;
+            var albumImage = current.albumPicture;
+            if (albumImage != null) {
+            	album = "<img src='"+albumImage+"' title='"+ album + "'/>";
+            }
             // lookup the table row
             var playRowIndex = playRowIndexes[channel];
             var playRow = playTable.rows[playRowIndex];
@@ -79,7 +83,6 @@ $(document).ready(function () {
             playRow.cells[2].innerHTML = title;
             playRow.cells[3].innerHTML = artist;
             playRow.cells[4].innerHTML = album;
-
 
         }
 

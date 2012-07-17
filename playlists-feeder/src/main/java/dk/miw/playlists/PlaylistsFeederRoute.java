@@ -29,7 +29,6 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 			.to("direct:process");
 		
 		from("direct:process")
-			.setProperty(Exchange.CHARSET_NAME, constant("UTF-8"))
 			.enrich("direct:lastfmEnricher", new LastFmAggregationStrategy())
 			.marshal().json(JsonLibrary.Gson, Track.class)
 			.to("activemq:topic:playlists");
@@ -37,7 +36,7 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 		//enrich flight with weather information
     	from("direct:lastfmEnricher")
     		.onException(Exception.class)
-    			.to("log:dk.miw.playlists?showAll=true" )
+    			.to("log:dk.miw.playlists?showAll=true&multiline=true" )
     			.handled(true)
     		.end()
     		.removeHeader(Exchange.HTTP_URI)
@@ -54,9 +53,10 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 					}
 				}
 			})
+			.setProperty(Exchange.CHARSET_NAME, constant("UTF-8"))
     		.setHeader(Exchange.HTTP_QUERY, simple("method=track.getInfo&api_key=b25b959554ed76058ac220b7b2e0a026&artist=${header.artist}&track=${header.title}"))
 			.setBody().simple("1")
-			.to("http://ws.audioscrobbler.com/2.0/");
+			.to("http://ws.audioscrobbler.com/2.0/?throwExceptionOnFailure=false");
 	}
 
 }
