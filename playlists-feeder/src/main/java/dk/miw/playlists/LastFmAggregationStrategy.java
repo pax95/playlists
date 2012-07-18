@@ -33,7 +33,7 @@ public class LastFmAggregationStrategy implements AggregationStrategy {
 			XPathFactory factory = XPathFactory.newInstance();
 			XPath xpath = factory.newXPath();
 			track.setAlbum(getStringFromXPath(doc, xpath, "/lfm/track/album/title/text()"));
-			track.setAlbumPicture(getStringFromXPath(doc, xpath, "/lfm/track/album/image[@size='medium']/text()"));
+			track.setAlbumImageUrl(getStringFromXPath(doc, xpath, "/lfm/track/album/image[@size='medium']/text()"));
 		} catch (Exception e) {
 		} 
 

@@ -1,27 +1,6 @@
 $(document).ready(function () {
 
-    var socket, socket2;
-
-    $('#connect_form2').submit(function () {
-
-        var host2 = $("#connect_url2").val();
-        socket2 = new WebSocket(host2);
-
-        // Add a connect listener
-        socket2.onopen = function () {
-            $('#msg').append('<p class="event">Socket2 Status: ' + socket2.readyState + ' (open)</p>');
-        }
-
-        socket2.onmessage = function (msg) {
-            $('#msg').append('<p class="message">Received2: ' + msg.data + "</p>");
-        }
-
-        socket2.onclose = function () {
-            $('#msg').append('<p class="event">Socket2 Status: ' + socket2.readyState + ' (Closed)</p>');
-        }
-
-        return false;
-    });
+    var socket;
 
 
     $('#connect_form').submit(function () {
@@ -38,7 +17,7 @@ $(document).ready(function () {
         // Add a connect listener
         socket.onopen = function () {
             $('#msg').append('<p class="event">Socket Status: ' + socket.readyState + ' (open)</p>');
-        }
+        };
 
         socket.onmessage = function (msg) {
            // $('#msg').append('<p class="message">Received: ' + msg.data + "</p>");
@@ -51,9 +30,9 @@ $(document).ready(function () {
             var title = current.title;
             var artist = current.artist;
             var album = current.album;
-            var albumImage = current.albumPicture;
-            if (albumImage != null) {
-            	album = "<img src='"+albumImage+"' title='"+ album + "'/>";
+            var albumImageUrl = current.albumImageUrl;
+            if (albumImageUrl != null) {
+            	album = "<img src='"+albumImageUrl+"' title='"+ album + "'/>";
             }
             // lookup the table row
             var playRowIndex = playRowIndexes[channel];
@@ -84,11 +63,11 @@ $(document).ready(function () {
             playRow.cells[3].innerHTML = artist;
             playRow.cells[4].innerHTML = album;
 
-        }
+        };
 
         socket.onclose = function () {
             $('#msg').append('<p class="event">Socket Status: ' + socket.readyState + ' (Closed)</p>');
-        }
+        };
 
         return false;
     });
@@ -96,7 +75,6 @@ $(document).ready(function () {
     $('#disconnect_form').submit(function () {
 
         socket.close();
-        socket2.close();
 
         $('#msg').append('<p class="event">Socket Status: ' + socket.readyState + ' (Closed)</p>');
         $('#disconnect').fadeOut({ duration:'fast' });

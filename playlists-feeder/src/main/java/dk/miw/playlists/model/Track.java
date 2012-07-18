@@ -11,7 +11,7 @@ public class Track {
 	private String time;
 	private String channel;
 	private String album;
-	private String albumPicture;
+	private String albumImageUrl;
 	
 	public String getTitle() {
 		return title;
@@ -51,7 +51,7 @@ public class Track {
 		Map<String, Object> info = (Map<String, Object>) map.get("info");
 		this.channel = (String) info.get("channel");
 		this.album = "";
-		this.albumPicture = "";
+		this.albumImageUrl = "";
 	}
 	
 	
@@ -62,17 +62,17 @@ public class Track {
 	public void setAlbum(String album) {
 		this.album = album;
 	}
-	public String getAlbumPicture() {
-		return albumPicture;
+	public String getAlbumImageUrl() {
+		return albumImageUrl;
 	}
-	public void setAlbumPicture(String albumPicture) {
-		this.albumPicture = albumPicture;
+	public void setAlbumImageUrl(String albumImageUrl) {
+		this.albumImageUrl = albumImageUrl;
 	}
 	
 	@Override
 	public String toString() {
 		return "Track [artist=" + artist + ", title=" + title + ", time=" + time + ", channel=" + channel + ", album="
-				+ album + ", albumPicture=" + albumPicture + "]";
+				+ album + ", albumImageUrl=" + albumImageUrl + "]";
 	}
 	
 }
