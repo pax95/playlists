@@ -17,7 +17,7 @@ public class PlaylistsFeederRoute extends RouteBuilder {
 	public void configure() throws Exception {
 
 		from("timer://pollingTimer?fixedRate=true&delay=0")
-			.split().method(ChannelList.class)
+			.split().method(ChannelList.class).parallelProcessing()
 			.setHeader(Exchange.HTTP_URI, simple("http://www.dr.dk/playlister/feeds/nowNext/nowPrev.drxml?items=0&cid=${body}"))
 			.to("http://dummy").id("dummy")
 			.unmarshal().json(JsonLibrary.Gson)
